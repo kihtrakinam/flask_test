@@ -1,14 +1,15 @@
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "hello world"
+    return render_template('index.html',pageTitle='Flask server Home Page')
 
-@app.route('/mani')
-def mani():
-    return "hello Mani!! Congratualtions on the first flask test."
+@app.route('/Author')
+def author():
+    return render_template('author.html',pageTitle='About Author')
 
 if __name__ == '__main__':
     app.run(debug=True)
