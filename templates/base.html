@@ -6,7 +6,12 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/stylesheet.css')}}"/>
   </head>
   <body>
-    {% block body %}
-    {% endblock %}
+    <div class="wrapper">
+      <div class="data">
+      {% block body %}
+      {% endblock %}
+      </div>
+      <div style="clear:both;"></div>
+    </div>
   </body>
 </html>
