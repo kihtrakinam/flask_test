@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
 {% if details %}
+  <p><a href="{{url_for("add_participant")}}">Add a new participant</a></p>
   <h2>Participants Added</h2>
   <table>
     <thead>
@@ -20,9 +21,18 @@
         <td>{{row.last_name}}</td>
         <td>{{row.age}}</td>
         <td>{{row.gender}}</td>
+        <td>
+          <form action = "{{url_for("remove_participant",participant_id=row.id)}}" method = "POST">
+            <input type = "submit" value = "Remove" />
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+{% endif %}
+{% if not details %}
+  <p>No participants added</p>
+  <p><a href="{{url_for("add_participant")}}">Add a new participant</a></p>
 {% endif %}
 {% endblock %}

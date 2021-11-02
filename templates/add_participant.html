@@ -7,10 +7,11 @@
       <p>{{form.first_name.label}} {{form.first_name(size=20,maxlength=50)}}</p>
       <p>{{form.last_name.label}} {{form.last_name(size=20,maxlength=50)}}</p>
       <p>{{form.age.label}} {{form.age(size=5,maxlength=3)}}</p>
-      <p>{{form.gender.label}} {{form.gender(size=5,maxlength=1)}}</p>
+      <p>{{form.gender.label}} {{form.gender()}}</p>
       <input type="submit" value="Add Participant">
   </form>
 </div>
+<p><a href="{{url_for("all_participants")}}">See all Participants</a></p>
 <h3> Recently added participant details below </h3>
 <h4> {{Name}} ---> {{Gender}} ---> {{Age}} </h4>
 <div style="clear:both;"></div>
