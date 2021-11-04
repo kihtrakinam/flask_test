@@ -2,12 +2,12 @@
 {% block body %}
 <div>
   <h3>Add a participant</h3>
-  <form method = "POST" action= "{{url_for('add_participant')}}">
-      {{form.csrf_token}}
-      <p>{{form.first_name.label}} {{form.first_name(size=20,maxlength=50)}}</p>
-      <p>{{form.last_name.label}} {{form.last_name(size=20,maxlength=50)}}</p>
-      <p>{{form.age.label}} {{form.age(size=5,maxlength=3)}}</p>
-      <p>{{form.gender.label}} {{form.gender()}}</p>
+  <form method = "POST" action = "{{url_for('add_participant')}}" id = 'form_add'>
+      {{form_add.csrf_token}}
+      <p>{{form_add.first_name.label}} {{form_add.first_name(size=20,maxlength=50)}}</p>
+      <p>{{form_add.last_name.label}} {{form_add.last_name(size=20,maxlength=50)}}</p>
+      <p>{{form_add.age.label}} {{form_add.age(size=5,maxlength=3)}}</p>
+      <p>{{form_add.gender.label}} {{form_add.gender()}}</p>
       <input type="submit" value="Add Participant">
   </form>
 </div>

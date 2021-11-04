@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block body %}
+<h3>Search Page</h3>
+<form method = "POST" action = "{{url_for('search')}}" id = "form_search">
+  {{form_search.csrf_token}}
+  <p>{{form_search.search_value(size=20)}} <input type="submit" value="Search"></p>
+</form>
+{% if search_results %}
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in search_results %}
+      <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.first_name}}</td>
+        <td>{{row.last_name}}</td>
+        <td>{{row.age}}</td>
+        <td>{{row.gender}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+<p><a href="{{url_for("all_participants")}}">Go to all_participants page</a></p>
+{% endblock %}

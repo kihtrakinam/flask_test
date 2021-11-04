@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
+<h3>Search bar</h3>
+<form method = "GET" action = "{{url_for("search")}}" id = "form_search">
+  <p>{{form_search.search_value(size=20)}} <input type="submit" value="Search"></p>
+</form>
 {% if details %}
   <p><a href="{{url_for("add_participant")}}">Add a new participant</a></p>
-  <h2>Participants Added</h2>
+  <p><a href="{{url_for("all_participants")}}">See all participants</a></p>
+  <h2>Participants List</h2>
   <table>
     <thead>
       <tr>
-        <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Age</th>
@@ -16,15 +20,19 @@
     <tbody>
       {% for row in details %}
       <tr>
-        <td>{{row.id}}</td>
         <td>{{row.first_name}}</td>
         <td>{{row.last_name}}</td>
         <td>{{row.age}}</td>
         <td>{{row.gender}}</td>
         <td>
-          <form action = "{{url_for("remove_participant",participant_id=row.id)}}" method = "POST">
-            <input type = "submit" value = "Remove" />
-          </form>
+        <form action = "{{url_for("remove_participant",participant_id=row.id)}}" method = "POST">
+          <input type = "submit" value = "Remove" />
+        </form>
+        </td>
+        <td>
+        <form action = "{{url_for("update_participant",participant_id=row.id)}}" method = "POST">
+          <input type = "submit" value = "Update" />
+        </form>
         </td>
       </tr>
       {% endfor %}
@@ -32,7 +40,8 @@
   </table>
 {% endif %}
 {% if not details %}
-  <p>No participants added</p>
+  <p>No participants found for the search term</p>
   <p><a href="{{url_for("add_participant")}}">Add a new participant</a></p>
+  <p><a href="{{url_for("all_participants")}}">See all participants</a></p>
 {% endif %}
 {% endblock %}
