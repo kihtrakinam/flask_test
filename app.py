@@ -46,22 +46,23 @@ def search():
     form_search = SearchForm()
     if request.method == 'GET':
         search_term= request.args.get('search_value')
-        search = search_term.strip(' ')
-        if search == '':
-            secret.prev_search = None
-            return redirect('/all_participants')
-        else:
-            search = "%{0}%".format(search)
-            secret.prev_search = search
-            results = participants.query.filter(or_(participants.first_name.like(search),participants.last_name.like(search))).all()
-            return render_template('all_participants.html',form_search=form_search,details=results,pageTitle='Participants after search')
+        if search_term is not None:
+            search = search_term.strip(' ')
+            if search == '':
+                secret.prev_search = None
+                return redirect('/all_participants')
+            else:
+                search = "%{0}%".format(search)
+                secret.prev_search = search
+                results = participants.query.filter(or_(participants.first_name.like(search),participants.last_name.like(search))).all()
+                return render_template('all_participants.html',form_search=form_search,details=results,pageTitle='Participants after search')
+    #else:
+    flag = secret.prev_search
+    if flag is None:
+        return redirect('/all_participants')
     else:
-        flag = secret.prev_search
-        if flag is None:
-            return redirect('/all_participants')
-        else:
-            results = participants.query.filter(or_(participants.first_name.like(flag),participants.last_name.like(flag))).all()
-            return render_template('all_participants.html',form_search=form_search,details=results,pageTitle='Participants after removal')
+        results = participants.query.filter(or_(participants.first_name.like(flag),participants.last_name.like(flag))).all()
+        return render_template('all_participants.html',form_search=form_search,details=results,pageTitle='Participants after removal')
 
 @app_loc.route('/')
 def index():
