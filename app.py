@@ -66,7 +66,7 @@ def search():
 
 @app_loc.route('/')
 def index():
-    return render_template('homepage.html',pageTitle='Flask server Home Page')
+    return render_template('index.html',pageTitle='Flask server Home Page')
 
 @app_loc.route('/Author')
 def author():
